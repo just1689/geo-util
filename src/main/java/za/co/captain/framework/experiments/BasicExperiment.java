@@ -26,9 +26,7 @@ public class BasicExperiment {
 
             TransactionRSTRepository helper = new TransactionRSTRepository();
             ArrayList<TransactionRST> all = helper.getRepository().getAll();
-
             LOG.info("Read table: " + helper.getRepository().getTableUrl());
-
             for (TransactionRST item : all) {
                 int i = item.countClosest(all, accuracy);
                 scores.add(TransactionRSTScore.builder().score(i).transaction(item).build());
@@ -36,7 +34,6 @@ public class BasicExperiment {
             }
 
             Collections.sort(scores, Comparator.comparingInt(TransactionRSTScore::getScore));
-
             int c = 0;
             for (TransactionRSTScore s : scores) {
                 results.add(s.getTransaction());
@@ -45,21 +42,14 @@ public class BasicExperiment {
                     break;
                 }
             }
-
             return results;
 
-
         } catch (CaptainException e) {
-            System.out.println(e.getHint());
+            LOG.warning(e.getHint());
             e.getException().printStackTrace();
         }
-
-
-
         return new ArrayList<>();
 
-
     }
-
 
 }
