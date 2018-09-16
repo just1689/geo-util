@@ -20,8 +20,6 @@ public class MyController {
     public ArrayList<TransactionRST> getHi(@PathVariable Integer count, @PathVariable BigDecimal accuracy) {
         return basicExperiment.getMostPopular(count, accuracy);
 
-
     }
-
 
 }
